@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>老人定位</title>
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        .form-inline {
+            position: absolute;
+            z-index: 9999
+        }
+
+        .form-inline .form-group {
+            display: inline-block;
+        }
+    </style>
+
+
+    <link href="css/bootstrap-3.3.4.css" rel="stylesheet">
+
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=A4749739227af1618f7b0d1b588c0e85"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+
+
+    <!--<script type="text/javascript"-->
+    <!--src="http://api.map.baidu.com/api?v=2.0&ak=DD279b2a90afdf0ae7a3796787a0742e"></script>-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/distpicker.data.js"></script>
+    <script src="js/distpicker.js"></script>
+    <script src="js/main.js"></script>
+
+    <style>
+        #MapZoom{
+            border:1px solid #ccc;
+            border-radius:5px;
+            width: 118px;
+            height: 34px;
+            position: fixed;
+            top:0;
+            right:0;
+            z-index:100;
+            background-color: #fff;
+            text-align: center;
+            line-height:34px;
+        }
+    </style>
+</head>
+<body>
+<form class="form-inline">
+    <div id="distpicker5">
+        <div class="form-group">
+            <label class="sr-only" for="province10">省</label>
+            <select class="form-control" id="province10">
+                <option value="" data-code="">-- 请选择 --</option>
+                <option value="北京市" data-code="110000">北京市</option>
+                <option value="天津市" data-code="120000">天津市</option>
+                <option value="河北省" data-code="130000">河北省</option>
+                <option value="山西省" data-code="140000">山西省</option>
+                <option value="内蒙古自治区" data-code="150000">内蒙古自治区</option>
+                <option value="辽宁省" data-code="210000">辽宁省</option>
+                <option value="吉林省" data-code="220000">吉林省</option>
+                <option value="黑龙江省" data-code="230000">黑龙江省</option>
+                <option value="上海市" data-code="310000">上海市</option>
+                <option value="江苏省" data-code="320000">江苏省</option>
+                <option value="浙江省" data-code="330000">浙江省</option>
+                <option value="安徽省" data-code="340000">安徽省</option>
+                <option value="福建省" data-code="350000">福建省</option>
+                <option value="江西省" data-code="360000">江西省</option>
+                <option value="山东省" data-code="370000">山东省</option>
+                <option value="河南省" data-code="410000">河南省</option>
+                <option value="湖北省" data-code="420000">湖北省</option>
+                <option value="湖南省" data-code="430000">湖南省</option>
+                <option value="广东省" data-code="440000">广东省</option>
+                <option value="广西壮族自治区" data-code="450000">广西壮族自治区</option>
+                <option value="海南省" data-code="460000">海南省</option>
+                <option value="重庆市" data-code="500000">重庆市</option>
+                <option value="四川省" data-code="510000">四川省</option>
+                <option value="贵州省" data-code="520000">贵州省</option>
+                <option value="云南省" data-code="530000">云南省</option>
+                <option value="西藏自治区" data-code="540000">西藏自治区</option>
+                <option value="陕西省" data-code="610000">陕西省</option>
+                <option value="甘肃省" data-code="620000">甘肃省</option>
+                <option value="青海省" data-code="630000">青海省</option>
+                <option value="宁夏回族自治区" data-code="640000">宁夏回族自治区</option>
+                <option value="新疆维吾尔自治区" data-code="650000">新疆维吾尔自治区</option>
+                <option value="台湾省" data-code="710000">台湾省</option>
+                <option value="香港特别行政区" data-code="810000">香港特别行政区</option>
+                <option value="澳门特别行政区" data-code="820000">澳门特别行政区</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="city10">市</label>
+            <select class="form-control" id="city10">
+                <option value="" data-code="">-- 请选择 --</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="district10">区</label>
+            <select class="form-control" id="district10">
+                <option value="" data-code="">-- 请选择 --</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<div id="MapZoom">
+    <span>地图级别:</span>
+    <span id="ZoomNum">5</span>
+</div>
+
+<div id="allmap"></div>
+
+
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap"); // 创建一个地图实例
+    map.centerAndZoom(new BMap.Point(116.403765, 39.914850),5);  //地图初始化，（中心点坐标，缩放级别）
+    map.enableScrollWheelZoom();  //    实现鼠标滑动缩放
+    function getBoundary(getcity) {
+        var bdary = new BMap.Boundary();
+        bdary.get(getcity, function (rs) {       //获取行政区域
+            map.clearOverlays();        //清除地图覆盖物
+            var count = rs.boundaries.length; //行政区域的点有多少个
+            if (count === 0) {
+                alert('未能获取当前输入行政区域');
+                return;
+            }
+            var pointArray = [];
+            for (var i = 0; i < count; i++) {
+                var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000",fillColor:"rgba(255,242,0,.4)"}); //建立多边形覆盖物
+                map.addOverlay(ply);  //添加覆盖物
+                pointArray = pointArray.concat(ply.getPath());
+            }
+            map.setViewport(pointArray);    //调整视野
+        });
+    }
+    $("#province10").change(function () {
+        getBoundary($("#province10 option:selected").html())
+    })
+    $("#city10").change(function () {
+        getBoundary($("#province10 option:selected").html() + $("#city10 option:selected").html())
+    })
+    $("#district10").change(function () {
+        getBoundary($("#province10 option:selected").html() + $("#city10 option:selected").html() + $("#district10 option:selected").html())
+    })
+
+    var pt = null;
+    var i = 0;
+    var markersA = [];
+    var icon1 = new BMap.Icon("img/older.png", new BMap.Size(25,30));
+    for (i=0; i < 200; i++) {
+        pt = new BMap.Point(Math.random() * 5 + 114, Math.random() * 8 + 22);
+        markersA.push(new BMap.Marker(pt,{icon:icon1}));
+    }
+    setTimeout(function(){
+        var markersB = [];
+        for (i=0; i < 2000; i++) {
+            pt = new BMap.Point(Math.random() * 5 + 113, Math.random() * 8 + 23);
+            markersB.push(new BMap.Marker(pt,{icon:icon1}));
+        }
+
+        var markerClustererB = new BMapLib.MarkerClusterer(map, {markers:markersB,
+            styles:[{
+                url:'img/olderjh.png',
+                size: new BMap.Size(40, 40),
+                textColor:'#fff',
+                textSize:'18'
+            }]
+        });
+
+    },2000);
+    setTimeout(function(){
+        var markersC = [];
+        for (i=0; i < 1000; i++) {
+            pt = new BMap.Point(Math.random() * 5 + 113, Math.random() * 8 + 23);
+            markersB.push(new BMap.Marker(pt,{icon:icon1}));
+        }
+
+        var markerClustererC = new BMapLib.MarkerClusterer(map, {markers:markersC,
+            styles:[{
+                url:'img/olderjh.png',
+                size: new BMap.Size(40, 40),
+                textColor:'#fff',
+                textSize:'18'
+            }]
+        });
+
+    },4000)
+
+
+
+    var markerClustererA = new BMapLib.MarkerClusterer(map, {
+        markers:markersA,
+        styles:[{
+            url:'img/olderjh.png',
+            size: new BMap.Size(40, 40),
+            textColor:'#fff',
+            textSize:'18'
+        }]
+    });
+
+
+//    显示当前级别
+    map.addEventListener("zoomend",function(){
+        $("#ZoomNum").text(map.getZoom());
+    })
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

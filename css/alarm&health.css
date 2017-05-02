@@ -1,0 +1,107 @@
+html, body, canvas {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    background-color: #2d3741;
+    /*width: 1920px;*/
+    /*height: 1080px;*/
+    width: 100%;
+    height: 100%;
+    /*padding: 28px;*/
+    margin: 0 auto;
+    /*box-sizing: border-box;*/
+    font-family: "SourceHanSansCN Normal";
+    overflow: hidden;
+}
+#wrap2 {
+    width: 98%;
+    height: 98%;
+    padding: 1%;
+
+}
+#wrap2 #wrap2_l{
+    width: 49.5%;
+    float: left;
+    height: 100%;
+    background-color: #1c262f;
+}
+#wrap2 #wrap2_r{
+    width: 49.5%;
+    float: right;
+    height: 100%;
+    background-color: #1c262f;
+    position: relative;
+}
+
+#wrap2 #wrap2_l h3{
+    height: 3%;
+    font-weight:400;
+    font-size:20px;
+    line-height: 20px;
+    color:#fff;
+    padding-top:2%;
+    margin-left:5%;
+}
+
+#wrap2 #wrap2_l #l_top{
+    width: 100%;
+    height: 35%;
+}
+#l_top #security{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+#l_top #warning{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#wrap2 #wrap2_l #l_m{
+    width: 100%;
+    height: 25%;
+}
+#wrap2_l #l_m #caseTotal{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+#wrap2_l #l_m #callback1{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#wrap2 #wrap2_l #l_b{
+    width: 100%;
+    height: 35%;
+}
+
+#wrap2_r #health{
+     width: 100%;
+     height: 40%;
+ }
+#wrap2_r #h_warning{
+     width: 50%;
+     height: 100%;
+    float: left;
+ }
+#wrap2_r #referral{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#wrap2_r #h_manage{
+    width: 100%;
+    height: 60%;
+}
+
+
+
+
+
+

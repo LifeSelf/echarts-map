@@ -1,0 +1,136 @@
+
+html, body, canvas {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    background-color: #2d3741;
+    /*width: 1920px;*/
+    /*height: 1080px;*/
+    width: 100%;
+    height: 100%;
+    /*padding: 28px;*/
+    margin: 0 auto;
+    /*box-sizing: border-box;*/
+    font-family: "SourceHanSansCN Normal";
+    overflow: hidden;
+}
+#wrap {
+    width: 98%;
+    height: 98%;
+    padding: 1%;
+    
+}
+#wrap #wrap_l{
+    width: 49.5%;
+    float: left;
+    height: 100%;
+    background-color: #1c262f;
+}
+#wrap #wrap_r{
+    width: 49.5%;
+    float: right;
+    height: 100%;
+    background-color: #1c262f;
+    position: relative;
+}
+#wrap #wrap_l #ageGroup{
+    width: 100%;
+    height: 50%;
+}
+
+#wrap #wrap_l #property{
+    width: 100%;
+    height: 50%;
+}
+#wrap #wrap_r #network{
+    width: 100%;
+    height: 100%;
+}
+#wrap #wrap_r #table{
+    /*width: 30%;*/
+    width: 300px;
+    height: 256px;
+    /*height: 50%;*/
+    position: absolute;
+    bottom:30px;
+    right:10px;
+    overflow: hidden;
+    background-color:#1c262f;
+    color:#fff;
+
+
+}
+#wrap #wrap_r #table table{
+    width: 100%;
+    height: 100%;
+}
+
+#wrap #wrap_r #table h3{
+    text-align: center;
+    font-weight:400;
+}
+#wrap #wrap_r #table td{
+    background-color: #1c262f;
+    text-align: center;
+}
+#wrap #wrap_r #table th{
+    background-color: #1c262f;
+    text-align: center;
+    font-weight:400;
+    height: 16px;
+}
+
+
+
+#wrap #wrap_r #table .table{
+    width: 100%;
+    border-collapse:collapse;
+    border-spacing:0;
+    background-color: #2d4455;
+}
+#table .table .fixedThead{
+    display: block;
+    width: 100%;
+}
+#table .table .fixedThead tr{
+    border-bottom:none;
+}
+#table .table .scrollTbody{
+    display: block;
+    height: 256px;
+    overflow: auto;
+    width: 100%;
+
+
+}
+
+
+.table td,.table th {
+    width: 80px;
+    border-right: 1px solid #212c36;
+    /*border-right: 1px solid #fff;*/
+    border-top: 1px solid #212c36;
+    /*border-top: 1px solid #fff;*/
+
+
+}
+.table tr{
+
+    border-left: 1px solid #212c36;
+    /*border-left: 1px solid #fff;*/
+    border-bottom: 1px solid #212c36;
+    /*border-bottom: 1px solid #fff;*/
+
+}
+thead.fixedThead tr th:last-child {
+    color:#fff;
+    width: 102px;
+}
+
+
+
+
+
+
